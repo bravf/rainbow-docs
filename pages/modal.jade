@@ -1,0 +1,218 @@
+extends ./_layout
+
+block title
+  | Modal - Rainbow
+
+block content
+  h1| Modal 对话框
+
+  div(class="anchor")
+    h2(id="概述")
+
+  div(class="anchor")
+    h3| Modal
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-button(
+          type="primary",
+          @click.native="isShow2=true"
+        )| 显示对话框
+
+        r-modal(
+          v-model="isShow2",
+          title="普通的Modal对话框标题2"
+        )
+          p| 对话框内容2
+          p| 对话框内容2
+          p| 对话框内容2
+          p| 对话框内容2
+
+          div(slot="footer")
+            r-button(@click.native="isShow2=false")| 取消
+            r-button(type="primary", @click.native="$alert('哈哈')")| 确定
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <r-button type="primary" @click.native="isShow2=true">显示对话框</r-button>
+            <r-modal v-model="isShow2" title="普通的Modal对话框标题2">
+              <p>对话框内容2</p>
+              <p>对话框内容2</p>
+              <p>对话框内容2</p>
+              <p>对话框内容2</p>
+              <div slot="footer">
+                <r-button @click.native="isShow2=false">取消</r-button>
+                <r-button type="primary" @click.native="$alert('哈哈')">确定</r-button>
+              </div>
+            </r-modal>
+            
+  div(class="anchor")
+    h3| 扩展的全局alert, confirm
+
+  r-card
+    r-tabs(v-model="common.tab2")
+      r-tab-pane(name="1", label="示例")
+        r-button(
+          type="primary",
+          @click.native="alert"
+        )| 全局alert
+
+        r-button(
+          type="primary",
+          @click.native="confirm"
+        )| 全局confirm
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <r-button type="primary" @click.native="alert">全局alert</r-button>
+            <r-button type="primary" @click.native="confirm">全局confirm</r-button>
+
+            <script>
+            export default {
+              methods: {
+                confirm () {
+                  this.$confirm({
+                    title: '测试confirm',
+                    content: '确定测试confirm?',
+                    onOk () {
+                      this.$alert('点击了确定', '', ()=>{
+                        this.$message('点击了确定', 'success')
+                      })
+                    },
+                    onCancel () {
+                      this.$alert('点击了取消', '', ()=>{
+                        this.$message('点击了取消', 'warning')
+                      })
+                    }
+                  })
+                },
+                alert () {
+                  this.$alert('测试alert', '', ()=>{
+                    alert('哈哈')
+                  })
+                }
+              }
+            }
+            </script>
+  
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Modal props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| 是否显示，可使用 v-model
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| title
+          td
+            div| 标题
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| width
+          td
+            div| 弹出层宽度
+          td
+            div| Number | String
+          td
+            div| 520
+  
+  .anchor
+    h3| Modal slot
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 名称
+          th
+            div| 说明
+      tbody
+        //- 
+        tr
+          td
+            div| footer
+          td
+            div| 对话框底部
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '4-3',
+            tab: '',
+            tab2: ''
+          },
+          isShow: false,
+          isShow2: false,
+        }
+      },
+      methods: {
+        confirm () {
+          this.$confirm({
+            title: '测试confirm',
+            content: '确定测试confirm?',
+            onOk () {
+              this.$alert('点击了确定', '', ()=>{
+                this.$message('点击了确定', 'success')
+              })
+            },
+            onCancel () {
+              this.$alert('点击了取消', '', ()=>{
+                this.$message('点击了取消', 'warning')
+              })
+            }
+          })
+        },
+        alert () {
+          this.$alert('测试alert', '', ()=>{
+            alert('哈哈')
+          })
+        }
+      }
+    })

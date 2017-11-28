@@ -1,0 +1,167 @@
+extends ./_layout
+
+block title
+  | Tag - Rainbow
+
+block content
+  h1| Tag 标签
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        div.margin-top-10
+          r-tag()
+            | 标签1
+          r-tag()
+            | 标签2
+          r-tag(name="标签3", closeable, @close="tagClose")
+            | 标签3
+        
+        div.margin-top-10
+          r-tag(size="small")
+            | 标签1
+          r-tag(size="small")
+            | 标签2
+          r-tag(size="small", name="标签3", closeable, @close="tagClose")
+            | 标签3
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <div class="margin-top-10">
+              <r-tag>标签1</r-tag>
+              <r-tag>标签2</r-tag>
+              <r-tag name="标签3" closeable @close="tagClose">标签3</r-tag>
+            </div>
+            <div class="margin-top-10">
+              <r-tag size="small">标签1</r-tag>
+              <r-tag size="small">标签2</r-tag>
+              <r-tag size="small" name="标签3" closeable @close="tagClose">标签3</r-tag>
+            </div>
+
+            <script>
+            export default {
+              methods: {
+                tagClose (e, name) {
+                  console.log(e, name)
+                }
+              }
+            }
+            </script>
+            
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Tag props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| closeable
+          td
+            div| 标签是否可以关闭
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| size
+          td
+            div| 标签尺寸，可选值为small或者不设置
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| name
+          td
+            div| 当前标签名称
+          td
+            div| String | Number
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| disabled
+          td
+            div| 是否禁用
+          td
+            div| Boolean
+          td
+            div| false
+  
+  .anchor
+    h3| Tag events
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 事件名
+          th
+            div| 说明
+          th
+            div| 返回值
+
+      tbody
+        //- 
+        tr
+          td
+            div| on-close
+          td
+            div| 关闭时触发
+          td
+            div| event, name
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '4-6',
+            tab: '',
+            tab2: ''
+          },
+        }
+      },
+      methods: {
+        tagClose (e, name) {
+          console.log(e, name)
+        }
+      }
+    })

@@ -1,0 +1,167 @@
+extends ./_layout
+
+block title
+  | Tabs - Rainbow
+
+block content
+  h1| Tabs 标签页
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-tabs(style="margin:10px;", v-model="tabsValue")
+          r-tab-pane(
+            name="pane1",
+            label="macOS",
+            icon="social-apple"
+          )
+            div| macOS
+            r-input(v-model="input")
+            {{input}}
+          
+          r-tab-pane(
+            name="pane2",
+            label="Windows",
+            icon="social-windows"
+          )
+            div| Windows1
+          
+          r-tab-pane(
+            name="pane3",
+            label="Linux",
+            icon="social-tux"
+          )
+            div| Linux
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <r-tabs style="margin:10px;" v-model="tabsValue">
+              <r-tab-pane name="pane1" label="macOS" icon="social-apple">
+                <div>macOS</div>
+                <r-input v-model="input"></r-input>{{input}}
+              </r-tab-pane>
+              <r-tab-pane name="pane2" label="Windows" icon="social-windows">
+                <div>Windows1</div>
+              </r-tab-pane>
+              <r-tab-pane name="pane3" label="Linux" icon="social-tux">
+                <div>Linux</div>
+              </r-tab-pane>
+            </r-tabs>
+            
+            <script>
+            export default {
+              data () {
+                tabsValue: '',
+                input: ''
+              }
+            }
+            </script>
+          
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Tabs props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| 当前选中的 pane 项，可使用 v-model
+          td
+            div| String | Number
+          td
+            div| -
+  
+  .anchor
+    h3| TabPane props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| name
+          td
+            div| 当前 pane 的名称，如果和 tabs 的 value 一致，则表示选中
+          td
+            div| String | Number
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| label
+          td
+            div| 标题
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| icon
+          td
+            div| 标题前可选的 icon
+          td
+            div| String
+          td
+            div| -
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '5-2',
+            tab: '',
+            tab2: ''
+          },
+          tabsValue: '',
+          input: ''
+        }
+      },
+      methods: {
+      }
+    })

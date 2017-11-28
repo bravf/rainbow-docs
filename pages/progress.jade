@@ -1,0 +1,113 @@
+extends ./_layout
+
+block title
+  | Progress - Rainbow
+
+block content
+  h1| Progress 进度条
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-progress(:percent="10")
+        r-progress(:percent="20", status="active")
+        r-progress(:percent="40", status="wrong")
+        r-progress(:percent="100", status="success", :stroke-width="5", hide-info)
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <r-progress :percent="10"></r-progress>
+            <r-progress :percent="20" status="active"></r-progress>
+            <r-progress :percent="40" status="wrong"></r-progress>
+            <r-progress :percent="100" status="success" :stroke-width="5" hide-info></r-progress>
+            
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Progress props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| percent
+          td
+            div| 当前进度 0-100
+          td
+            div| Number
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| status
+          td
+            div| 进度条状态，可选值 normal、active、wrong、success
+          td
+            div| String
+          td
+            div| normal
+        
+        //- 
+        tr
+          td
+            div| stroke-width
+          td
+            div| 进度条高度
+          td
+            div| Number
+          td
+            div| 10
+        
+        //- 
+        tr
+          td
+            div| hide-info
+          td
+            div| 是否隐藏数字进度信息
+          td
+            div| Boolean
+          td
+            div| false
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '4-4',
+            tab: '',
+            tab2: ''
+          },
+        }
+      },
+      methods: {
+      }
+    })

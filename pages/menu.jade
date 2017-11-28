@@ -1,0 +1,280 @@
+extends ./_layout
+
+block title
+  | Menu - Rainbow
+
+block content
+  h1| Menu 导航菜单
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-menu(
+          style="width:200px"
+          mode="vertical",
+          v-model="activeMenu"
+        )
+          r-menu-item(name="1")
+            r-icon(type="ios-paper")
+            | 内容管理
+
+          r-menu-item(name="2")
+            r-icon(type="ios-people")
+            | 用户管理
+          
+          r-sub-menu(name="3")
+            template(slot="title")
+              r-icon(type="stats-bars")
+              | 统计分析
+            
+            r-menu-group(title="使用")
+              r-menu-item(
+                name="3-1",
+                href="http://baidu.com",
+                target="_blank"
+              )
+                | 新增和启动
+              r-menu-item(name="3-2")| 活跃分期
+              r-menu-item(name="3-3")| 时段分析
+
+            r-menu-group(title="留存")
+              r-menu-item(name="3-4")| 用户留存
+              r-menu-item(name="3-5")| 流失用户
+
+          r-menu-item(
+            name="4", 
+            href="http://baidu.com"
+          )
+            r-icon(type="settings")
+            |综合设置
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <r-menu style="width:200px" mode="vertical" v-model="activeMenu">
+              <r-menu-item name="1">
+                <r-icon type="ios-paper"></r-icon>内容管理
+              </r-menu-item>
+              <r-menu-item name="2">
+                <r-icon type="ios-people"></r-icon>用户管理
+              </r-menu-item>
+              <r-sub-menu name="3">
+                <template slot="title">
+                  <r-icon type="stats-bars"></r-icon>统计分析
+                </template>
+                <r-menu-group title="使用">
+                  <r-menu-item name="3-1" href="http://baidu.com" target="_blank">新增和启动</r-menu-item>
+                  <r-menu-item name="3-2">活跃分期</r-menu-item>
+                  <r-menu-item name="3-3">时段分析</r-menu-item>
+                </r-menu-group>
+                <r-menu-group title="留存">
+                  <r-menu-item name="3-4">用户留存</r-menu-item>
+                  <r-menu-item name="3-5">流失用户</r-menu-item>
+                </r-menu-group>
+              </r-sub-menu>
+              <r-menu-item name="4" href="http://baidu.com">
+                <r-icon type="settings"></r-icon>综合设置
+              </r-menu-item>
+            </r-menu>  
+          
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Menu props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| mode
+          td
+            div| 渲染方式，可选值 vertical(垂直)、 horizontal(水平)
+          td
+            div| String
+          td
+            div| vertical
+        
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| 当前 menu 选中的值，可使用 v-model
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| expand
+          td
+            div| 是否全展开，设置后默认展开所有submenu
+          td
+            div| Boolean
+          td
+            div| false
+  
+  .anchor
+    h3| MenuItem props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| name
+          td
+            div| item 名称，如果和父级 menu 的 value 相同，则表示选中状态，如果此 item 的直系父级为 submenu，则 name 的命名规则有限制，比如 submenu 的 name 为 1，则 menuItem 的 name 为 1-1
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| href
+          td
+            div| 点击此 item 时候跳转的链接地址
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| target
+          td
+            div| 打开链接的方式，比如 _blank
+          td
+            div| String
+          td
+            div| -
+  
+  .anchor
+    h3| SubMenu props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| name
+          td
+            div| submenu 的名称，如果父级 menu 的  value 满足 menu.value.indexOf(this.name) === 0，则展开submenu
+          td
+            div| String
+          td
+            div| -
+  
+  .anchor
+    h3| SubMenu slot
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 名称
+          th
+            div| 说明
+      tbody
+        //- 
+        tr
+          td
+            div| title
+          td
+            div| 子菜单标题
+  
+  .anchor
+    h3| MenuGroup props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| title
+          td
+            div| 分组标题	
+          td
+            div| String
+          td
+            div| -
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '5-1',
+            tab: '',
+            tab2: ''
+          },
+          activeMenu: ''
+        }
+      },
+      methods: {
+      }
+    })

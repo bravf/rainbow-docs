@@ -1,0 +1,282 @@
+extends ./_layout
+
+block title
+  | Select - Rainbow
+
+block content
+  h1| Select 选择器
+
+  div(class="anchor")
+    h2(id="概述")
+
+  .anchor
+    h3| select 单选
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-select(
+          v-model="currCity",
+          clearable,
+          filterable
+        )
+          r-select-option(
+            v-for="city in cities",
+            :label="city.label",
+            :value="city.value",
+            :key="city.value",
+          )
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <r-select v-model="currCity" clearable filterable>
+              <r-select-option v-for="city in cities" :label="city.label" :value="city.value" :key="city.value"></r-select-option>
+            </r-select>
+
+            <script>
+            var cities = []
+            for (var i=0; i<12; i++){
+              cities.push({
+                value: i,
+                label: '北京' + i,
+              })
+            }
+
+            exprot default {
+              data () {
+                return {
+                  currCity: '',
+                  cities: cities,
+                }
+              }
+            }
+            </script>
+  
+  .anchor
+    h3| select 多选
+
+  r-card
+    r-tabs(v-model="common.tab2")
+      r-tab-pane(name="1", label="示例")
+        r-select(
+          v-model="currCities",
+          clearable,
+          filterable
+        )
+          r-select-option(
+            v-for="city in cities",
+            :label="city.label",
+            :value="city.value",
+            :key="city.value",
+          )
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <r-select v-model="currCities" clearable filterable>
+                <r-select-option v-for="city in cities" :label="city.label" :value="city.value" :key="city.value"></r-select-option>
+              </r-select>
+
+            <script>
+            var cities = []
+            for (var i=0; i<12; i++){
+              cities.push({
+                value: i,
+                label: '北京' + i,
+              })
+            }
+
+            exprot default {
+              data () {
+                return {
+                  currCity: '',
+                  cities: cities,
+                }
+              }
+            }
+            </script>
+  
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Select props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| 指定选中项目的 value 值，可使用 v-model。如果 value 是 Array 类型，表示多选
+          td
+            div| Sring | Number | Array
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| disabled
+          td
+            div| 是否禁用
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| clearable
+          td
+            div| 是否可以清空
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| filterable
+          td
+            div| 是否可以搜索
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| size
+          td
+            div| 选择框尺寸，可选值small，或者不设置
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| placeholder
+          td
+            div| 默认文字
+          td
+            div| String
+          td
+            div| 请选择
+        
+        //- 
+        tr
+          td
+            div| not-found-text
+          td
+            div| 下拉列表为空时显示的内容
+          td
+            div| String
+          td
+            div| 无匹配数据
+  
+  .anchor
+    h3| SelectOption props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| 选项值，默认根据此属性值进行筛选
+          td
+            div| Sring | Number
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| label
+          td
+            div| 选项显示的内容
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| disabled
+          td
+            div| 时候禁用当前项
+          td
+            div| Boolean
+          td
+            div| false
+
+block script
+  script.
+    var cities = []
+    for (var i=0; i<12; i++){
+      cities.push({
+        value: i,
+        label: '北京' + i,
+      })
+    }
+
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '3-5',
+            tab: '',
+            tab2: ''
+          },
+          currCity: '',
+          currCities: [],
+          cities: cities,
+        }
+      },
+      methods: {
+        clickIcon () {
+          this.common.input1 = ''
+        }
+      }
+    })

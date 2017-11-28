@@ -1,0 +1,272 @@
+extends ./_layout
+
+block title
+  | Input - Rainbow
+
+block content
+  h1| Input 输入框
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        .margin-top-10
+          r-input(v-model="common.input1")
+          span(v-text="common.input1")
+        
+        .margin-top-10
+          r-input(
+            placeholder, 
+            icon="ios-close-outline", 
+            v-model="common.input1",
+            @click-icon="clickIcon"
+          )
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <div class="margin-top-10">
+              <r-input v-model="common.input1"></r-input>
+              <span v-text="common.input1"></span>
+            </div>
+            <div class="margin-top-10">
+              <r-input placeholder icon="ios-close-outline" v-model="common.input1" @click-icon="clickIcon"></r-input>
+            </div>
+
+            <script>
+            exprot default {
+              data () {
+                return {
+                  common: {
+                    input1: '测试数据',
+                  },
+                }
+              },
+              methods: {
+                clickIcon () {
+                  this.common.input1 = ''
+                }
+              }
+            }
+            </script>
+  
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Input props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| type
+          td
+            div| 输入框类型，可选值 text、password、textarea
+          td
+            div| Sring
+          td
+            div| text
+
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| 绑定值，可使用 v-model 双向绑定
+          td
+            div| Sring | Number
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| size
+          td
+            div| 输入框尺寸，可选值 small 或者不设置
+          td
+            div| Sring
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| placeholder
+          td
+            div| 占位文本
+          td
+            div| String
+          td
+            div| 请输入
+        
+        //- 
+        tr
+          td
+            div| disabled
+          td
+            div| 设置输入框为禁用状态
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| readonly
+          td
+            div| 设置输入框只读状态
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| maxlength
+          td
+            div| 最大输入长度
+          td
+            div| Number | String
+          td
+            div| -
+
+        //- 
+        tr
+          td
+            div| icon
+          td
+            div| 输入框尾部图标
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| rows
+          td
+            div| 文本域默认行数，仅在 textarea 类型下有效
+          td
+            div| Number | String 
+          td
+            div| 2
+        
+        //- 
+        tr
+          td
+            div| should-validate
+          td
+            div| 是否在blur时候触发校验，当input组件当做其他组件的子组件时候有用
+          td
+            div| Boolean
+          td
+            div| true
+        
+        //- 
+        tr
+          td
+            div| trim
+          td
+            div| 是否在 blur 时候对 value 进行trim
+          td
+            div| Boolean
+          td
+            div| false
+      
+  .anchor
+    h3| Input events
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 事件名
+          th
+            div| 说明
+          th
+            div| 返回值
+
+      tbody
+        //- 
+        tr
+          td
+            div| on-click-icon
+          td
+            div| 设置 icon 属性后，点击图标时触发
+          td
+            div| event
+        
+        //- 
+        tr
+          td
+            div| on-change
+          td
+            div| 同原生input组件的change
+          td
+            div| event
+        
+        //- 
+        tr
+          td
+            div| on-focus
+          td
+            div| 同原生input组件的focus
+          td
+            div| event
+        
+        //- 
+        tr
+          td
+            div| on-blur
+          td
+            div| 同原生input组件的blur
+          td
+            div| event
+        
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '3-1',
+            tab: '',
+            input1: '测试数据',
+          },
+        }
+      },
+      methods: {
+        clickIcon () {
+          this.common.input1 = ''
+        }
+      }
+    })

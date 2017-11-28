@@ -1,0 +1,136 @@
+extends ./_layout
+
+block title
+  | Timeline - Rainbow
+
+block content
+  h1| Timeline 时间轴
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-timeline(pending)
+          r-timeline-item(color="green")
+            r-icon(type="trophy", slot="dot")
+            span| 发布1.0版本
+
+          r-timeline-item()| 发布2.0版本
+          r-timeline-item()| 发布3.0版本
+          r-timeline-item(color="red")
+            a(href="#")| 查看更多
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <r-timeline pending>
+              <r-timeline-item color="green">
+                <r-icon type="trophy" slot="dot"></r-icon><span>发布1.0版本</span>
+              </r-timeline-item>
+              <r-timeline-item>发布2.0版本</r-timeline-item>
+              <r-timeline-item>发布3.0版本</r-timeline-item>
+              <r-timeline-item color="red"><a href="#">查看更多</a></r-timeline-item>
+            </r-timeline>
+            
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Timeline props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| pending
+          td
+            div| 指定最后一个节点是否为幽灵节点
+          td
+            div| Boolean
+          td
+            div| false
+  
+  .anchor
+    h3| TimelineItem props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| color
+          td
+            div| 圆圈颜色，可选值 blue、red、green
+          td
+            div| String
+          td
+            div| blue
+  
+  .anchor
+    h3| TimelineItem slot
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 名称
+          th
+            div| 说明
+      tbody
+        //- 
+        tr
+          td
+            div| dot
+          td
+            div| 自定义时间轴点内容
+        
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '4-5',
+            tab: '',
+            tab2: ''
+          },
+        }
+      },
+      methods: {
+      }
+    })

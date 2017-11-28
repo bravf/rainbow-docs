@@ -1,0 +1,153 @@
+extends ./_layout
+
+block title
+  | Page - Rainbow
+
+block content
+  h1| Page 分页
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        div.margin-top-10
+          r-page(
+            v-model="currPage",
+            :total="total",
+            :show-total="true",
+          )
+      
+        div.margin-top-10
+          r-page(
+            v-model="currPage",
+            :total="total",
+            :show-total="true",
+            size="small",
+            :page-size="1000"
+          )
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <div class="margin-top-10">
+              <r-page v-model="currPage" :total="total" :show-total="true"></r-page>
+            </div>
+            <div class="margin-top-10">
+              <r-page v-model="currPage" :total="total" :show-total="true" size="small" :page-size="1000"></r-page>
+            </div>
+          
+            <script>
+            export default {
+              data () {
+                return {
+                  currPage: 1,
+                  total: 23400,
+                }
+              }
+            }
+            </script>
+          
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Page props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| 当前页码，可使用 v-model
+          td
+            div| Number
+          td
+            div| -
+
+        //- 
+        tr
+          td
+            div| total
+          td
+            div| 数据总量
+          td
+            div| Number
+          td
+            div| 0
+        
+        //- 
+        tr
+          td
+            div| size
+          td
+            div| 尺寸，可选值 small，或者不设置
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| show-total
+          td
+            div| 是否显示总条目
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| page-size
+          td
+            div| 每页多少条
+          td
+            div| Number
+          td
+            div| 10
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '5-4',
+            tab: '',
+            tab2: ''
+          },
+          currPage: 1,
+          total: 23400,
+        }
+      },
+      methods: {
+        hello () {
+          alert(this.total)
+        }
+      }
+    })

@@ -1,0 +1,447 @@
+extends ./_layout
+
+block title
+  | Table - Rainbow
+
+block content
+  h1| Table 表格
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-table(
+          :data="data1", 
+          ref="table", 
+          :border="false", 
+          :show-header="true",
+          :sort-method="sort",
+          :sort-field="sortField",
+          :sort-dir="sortDir",
+          :loading="loading",
+          @row-click="rowClick"
+        )
+          
+          r-table-column(
+            width="50",
+            type="checkbox",
+          )
+          r-table-column(
+            width="50",
+            type="index",
+          )
+          r-table-column(
+            title="姓名",
+            field="name",
+            width="80",
+            :ellipsis="true",
+          )
+            template(slot-scope="scope")
+              r-tooltip()
+                span {{scope.data.name}}
+                div(slot="content")
+                  | {{scope.data.name}}
+
+          r-table-column(
+            title="数学",
+            field="math",
+            align="right",
+            :sortable="true",
+            v-if="test"
+          )
+          r-table-column(
+            title="语文",
+            field="chinese.value",
+            align="right",
+            :sortable="true"
+          )
+          r-table-column(
+            title="操作",
+            align="center",
+            width="140",
+            v-if="test"
+          )
+            template(slot-scope="scope")
+              r-button(
+                type="primary",
+                size="small",
+                @click.native="_alert(scope.data.id, $event)",
+                v-if="test"
+              )| 查看
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <r-table 
+              :data="data1" ref="table" :border="false" :show-header="true" :sort-method="sort" 
+              :sort-field="sortField" :sort-dir="sortDir" :loading="loading" @row-click="rowClick"
+            >
+              <r-table-column width="50" type="checkbox"></r-table-column>
+              <r-table-column width="50" type="index"></r-table-column>
+              <r-table-column title="姓名" field="name" width="80" :ellipsis="true">
+                <template slot-scope="scope">
+                  <r-tooltip>
+                    <span>{{scope.data.name}}</span>
+                    <div slot="content">{{scope.data.name}}</div>
+                  </r-tooltip>
+                </template>
+              </r-table-column>
+              <r-table-column title="数学" field="math" align="right" :sortable="true" v-if="test"></r-table-column>
+              <r-table-column title="语文" field="chinese.value" align="right" :sortable="true"></r-table-column>
+              <r-table-column title="操作" align="center" width="140" v-if="test">
+                <template slot-scope="scope">
+                  <r-button type="primary" size="small" @click.native="_alert(scope.data.id, $event)" v-if="test">查看</r-button>
+                </template>
+              </r-table-column>
+            </r-table>
+
+            <script>
+            var data1 = []
+            for (var i=0; i<10; i++){
+              data1.push({
+                id: i,
+                name: '张三测试测试测试测试' + i,
+                math: i * 10,
+                chinese: {
+                  value: i* 10 + 5
+                },
+              })
+            }
+            exprot default {
+              data () {
+                return {
+                  data1 : data1,
+                  test: true,
+                  sortField: 'math',
+                  sortDir: 'asc',
+                  loading: false,
+                }
+              },
+              methods: {
+                _alert (id, e) {
+                  e.stopPropagation()
+                  this.$alert(id)
+                },
+                sort (dir, field) {
+                  this.loading = true
+
+                  setTimeout(function (){
+                    this.data.sort((a, b)=>{
+                      var x = a[field] - b[field]
+
+                      if (dir === 'asc'){
+                        return x
+                      }
+                      else {
+                        return -x
+                      }
+                    })
+
+                    this.sortField = field
+                    this.sortDir = dir
+
+                    this.loading = false
+                  }, 1000)
+                  
+                },
+                rowClick (data, e) {
+                  this.$message('点击了' + data.id)
+                }
+              }
+            }
+            </script>
+  
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Table props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| data
+          td
+            div| 显示的结构化数据
+          td
+            div| Array
+          td
+            div| -
+
+        //- 
+        tr
+          td
+            div| border
+          td
+            div| 是否显示纵向边框
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| width
+          td
+            div| 表格宽度
+          td
+            div| Number | String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| no-data-text
+          td
+            div| 数据为空时显示的提示内容
+          td
+            div| String
+          td
+            div| 暂无数据
+        
+        //- 
+        tr
+          td
+            div| sort-method
+          td
+            div| 排序方法 ，接受两个参数type, field，type值为asc，desc
+          td
+            div| Function
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| sort-field
+          td
+            div| 当前的排序字段
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| sort-dir
+          td
+            div| 当前的排序顺序，可选值asc, desc
+          td
+            div| String
+          td
+            div| -
+
+        //- 
+        tr
+          td
+            div| loading
+          td
+            div| 数据加载时候，显示的loading效果
+          td
+            div| Boolean
+          td
+            div| false
+  
+  .anchor
+    h3| Table events
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 事件名
+          th
+            div| 说明
+          th
+            div| 返回值
+      tbody
+        //- 
+        tr
+          td
+            div| on-row-click
+          td
+            div| 单击某一行时触发
+          td
+            div| 当前行数据
+  
+  .anchor
+    h3| TableColumn props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| title
+          td
+            div| 列标题
+          td
+            div| Sring
+          td
+            div| #
+        
+        //- 
+        tr
+          td
+            div| field
+          td
+            div| 列字段名
+          td
+            div| Sring
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| type
+          td
+            div| 列类型，可选值有 index、checkbox、radio 或者不设置
+          td
+            div| Sring
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| width
+          td
+            div| 列宽度
+          td
+            div| Number | Sring
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| align
+          td
+            div| 对齐方式，可选值 left、right、center
+          td
+            div| Sring
+          td
+            div| left
+        
+        //- 
+        tr
+          td
+            div| sortable
+          td
+            div| 此列是否支持排序
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| ellipsis
+          td
+            div| 开启后，文本将不换行，超出部分显示省略号。需要同时设置width属性
+          td
+            div| Sring
+          td
+            div| false
+
+block script
+  script.
+    var data1 = []
+    for (var i=0; i<10; i++){
+      data1.push({
+        id: i,
+        name: '张三测试测试测试测试' + i,
+        math: i * 10,
+        chinese: {
+          value: i* 10 + 5
+        },
+      })
+    }
+
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '3-4',
+            tab: '',
+          },
+
+          data1 : data1,
+          test: true,
+          sortField: 'math',
+          sortDir: 'asc',
+          loading: false,
+        }
+      },
+      methods: {
+        _alert (id, e) {
+          e.stopPropagation()
+          this.$alert(id)
+        },
+        sort (dir, field) {
+          this.loading = true
+
+          setTimeout(function (){
+            this.data1.sort(function (a, b){
+              var x = a[field] - b[field]
+
+              if (dir === 'asc'){
+                return x
+              }
+              else {
+                return -x
+              }
+            })
+
+            this.sortField = field
+            this.sortDir = dir
+
+            this.loading = false
+          }, 1000)
+          
+        },
+        rowClick (data, e) {
+          this.$message('点击了' + data.id)
+        }
+      }
+    })

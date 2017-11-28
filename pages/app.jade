@@ -1,0 +1,38 @@
+extends ./_layout
+
+block title
+  | App - Rainbow
+
+block content
+  h1| App布局
+
+  div(class="anchor")
+    h2(id="CDN_引入")
+
+    pre
+      code(class="html")
+      textarea.
+        <r-app>
+          <div slot="header"></div>
+          <div slot="aside"></div>
+          <div slot="main"></div>
+        </r-app>
+      
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '2-2'
+          }
+        }
+      }
+    })

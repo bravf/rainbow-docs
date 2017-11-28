@@ -1,0 +1,211 @@
+extends ./_layout
+
+block title
+  | Radio - Rainbow
+
+block content
+  h1| Radio 单选框
+
+  div(class="anchor")
+    h2(id="概述")
+
+  .anchor
+    h3| radio
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-radio(
+          v-model="common.sex",
+          label="男",
+          :value="0"
+        )
+        r-radio(
+          v-model="common.sex",
+          label="女",
+          :value="1"
+        )
+        r-radio(
+          v-model="common.sex",
+          label="其他",
+          :value="2"
+        )
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <r-radio v-model="common.sex" label="男" :value="0"></r-radio>
+            <r-radio v-model="common.sex" label="女" :value="1"></r-radio>
+            <r-radio v-model="common.sex" label="其他" :value="2"></r-radio>
+
+            <script>
+            exprot default {
+              data () {
+                return {
+                  common: {
+                    sex: '',
+                  },
+                }
+              }
+            }
+            </script>
+  
+  .anchor
+    h3| radio-group
+
+  r-card
+    r-tabs(v-model="common.tab2")
+      r-tab-pane(name="1", label="示例")
+        r-radio-group(v-model="common.sex")
+          r-radio(
+            label="男",
+            :value="0"
+          )
+          r-radio(
+            label="女",
+            :value="1"
+          )
+          r-radio(
+            label="其他",
+            :value="2"
+          )
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <r-radio-group v-model="common.sex">
+              <r-radio label="男" :value="0"></r-radio>
+              <r-radio label="女" :value="1"></r-radio>
+              <r-radio label="其他" :value="2"></r-radio>
+            </r-radio-group>
+
+            <script>
+            exprot default {
+              data () {
+                return {
+                  common: {
+                    sex: '',
+                  },
+                }
+              }
+            }
+            </script>
+  
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Radio props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| checked-value
+          td
+            div| radio是否选中，v-model 占用值，如果和 value 相同或者 === true 则选中
+          td
+            div| Sring | Number | Boolean
+          td
+            div| -
+
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| radio自身值
+          td
+            div| Sring | Number | Boolean
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| label
+          td
+            div| radio的文本描述
+          td
+            div| Sring | Number
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| disabled
+          td
+            div| 是否禁用
+          td
+            div| Boolean
+          td
+            div| false
+  
+  .anchor
+    h3| RadioGroup props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| checked-value
+          td
+            div| 控制哪个radio选中，v-model 占用值
+          td
+            div| Sring | Number
+          td
+            div| -
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '3-2',
+            tab: '',
+            sex: '',
+            tab2: ''
+          },
+        }
+      },
+      methods: {
+        clickIcon () {
+          this.common.input1 = ''
+        }
+      }
+    })

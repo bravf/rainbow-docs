@@ -1,0 +1,203 @@
+extends ./_layout
+
+block title
+  | Datepicker - Rainbow
+
+block content
+  h1| Datepicker 日期选择器
+
+  div(class="anchor")
+    h2(id="概述")
+    
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        div.margin-top-10
+          h3| 开始时间
+          r-datepicker(
+            v-model="startDate",
+            placeholder="开始时间",
+            clearable,
+            :disabled-date="disabledDate",
+            format="b",
+          )
+
+        div.margin-top-10
+          h3| 结束时间（size=small）
+          r-datepicker(
+            v-model="endDate",
+            placeholder="结束时间",
+            clearable,
+            :disabled-date="disabledDate2",
+            size="small",
+          )
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <div class="margin-top-10">
+              <h3>开始时间</h3>
+              <r-datepicker v-model="startDate" placeholder="开始时间" clearable :disabled-date="disabledDate" format="b"></r-datepicker>
+            </div>
+            <div class="margin-top-10">
+              <h3>结束时间（size=small）</h3>
+              <r-datepicker v-model="endDate" placeholder="结束时间" clearable :disabled-date="disabledDate2" size="small"></r-datepicker>
+            </div>
+            <script>
+            exprot default {
+              data () {
+                return {
+                  startDate: '',
+                  endDate: '',
+                }
+              },
+              watch: {
+                startDate () {
+                  this.endDate = ''
+                }
+              },
+              methods: {
+                disabledDate (date) {
+                  /* 禁用小于今天的时期 */
+                  var today = new Date
+                  return +date < +today
+                },
+                disabledDate2 (date) {
+                  return +date <= +(new Date(this.startDate + ' 23:59:59'))
+                }
+              }
+            }
+            </script>
+  
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Datepicker props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| datepicker 的值，可使用 v-model
+          td
+            div| Sring
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| placeholder
+          td
+            div| 默认文字
+          td
+            div| String
+          td
+            div| 选择日期
+        
+        //- 
+        tr
+          td
+            div| clearable
+          td
+            div| 是否可以清空
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| disabled
+          td
+            div| 是否禁用
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| size
+          td
+            div| 尺寸，可选值small，或者不设置
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| disabled-date
+          td
+            div| 自定义禁用日期函数，传入参数为目标日期的23点59分59秒
+          td
+            div| Function
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| format
+          td
+            div| 日期类型，可选值为a、b，a表示yyyy-MM-dd, b表示yyyy/MM/dd
+          td
+            div| String
+          td
+            div| a
+  
+block script
+  script.
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '3-6',
+            tab: '',
+            tab2: ''
+          },
+          startDate: '',
+          endDate: '',
+        }
+      },
+      watch: {
+        startDate () {
+          this.endDate = ''
+        },
+        'common.componentValue' () {console.log(1)
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      methods: {
+        disabledDate (date) {
+          // 禁用小于今天的时期
+          var today = new Date
+          return +date < +today
+        },
+        disabledDate2 (date) {
+          return +date <= +(new Date(this.startDate + ' 23:59:59'))
+        }
+      }
+    })

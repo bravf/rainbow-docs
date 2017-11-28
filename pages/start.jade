@@ -1,0 +1,40 @@
+extends ./_layout
+
+block title
+  | 快速上手 - Rainbow
+
+block content
+  h1| 安装
+
+  div(class="anchor")
+    h2(id="CDN_引入")
+
+    pre
+      code
+      textarea.
+        <!-- 引入Vue -->
+        <script src="//vuejs.org/js/vue.min.js"></script>
+        <!-- 引入字体样式，依赖 http://ionicons.com/ -->
+        <link rel="stylesheet" href="//http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="//unpkg.com/rainbow-ui/index.css">
+        <!-- 引入组件库 -->
+        <script src="//unpkg.com/rainbow-ui/index.js"></script>
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '1'
+          }
+        }
+      }
+    })

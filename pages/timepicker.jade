@@ -1,0 +1,223 @@
+extends ./_layout
+
+block title
+  | Timepicker - Rainbow
+
+block content
+  h1| Timepicker 时间选择器
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        div.margin-top-10
+          span| 几点几分几秒
+          r-timepicker(
+            v-model="time",
+            placeholder="选择起飞时间",
+            clearable,
+            format="a",
+            :disabled-hours="[1,4,7]",
+            :disabled-minutes="[2,5,8]",
+            :disabled-seconds="[3,6,9]",
+          )
+
+        div.margin-top-10
+          span| 几点几分
+          r-timepicker(
+            v-model="time2",
+            placeholder="选择起飞时间",
+            clearable,
+            format="b",
+            :disabled-hours="[1,4,7]",
+            :disabled-minutes="[2,5,8]",
+          )
+        
+        div.margin-top-10
+          span| 几分几秒
+          r-timepicker(
+            v-model="time3",
+            placeholder="选择起飞时间",
+            clearable,
+            format="c",
+            :disabled-minutes="[2,5,8]",
+            :disabled-seconds="[3,6,9]",
+            size="small"
+          )
+
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <div class="margin-top-10">
+              <h3>几点几分几秒</h3>
+              <r-timepicker v-model="time" placeholder="选择起飞时间" clearable format="a" 
+              :disabled-hours="[1,4,7]" :disabled-minutes="[2,5,8]" :disabled-seconds="[3,6,9]"></r-timepicker>
+            </div>
+            <div class="margin-top-10">
+              <h3>几点几分</h3>
+              <r-timepicker v-model="time2" placeholder="选择起飞时间" clearable format="b" 
+              :disabled-hours="[1,4,7]" :disabled-minutes="[2,5,8]"></r-timepicker>
+            </div>
+            <div class="margin-top-10">
+              <h3>几分几秒</h3>
+              <r-timepicker v-model="time3" placeholder="选择起飞时间" clearable format="c" 
+              :disabled-minutes="[2,5,8]" :disabled-seconds="[3,6,9]" size="small"></r-timepicker>
+            </div>
+
+            <script>
+            exprot default {
+              data () {
+                return {
+                  time: '05:30:00',
+                  time2: '06:35',
+                  time3: '',
+                }
+              }
+            }
+            </script>
+  
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Timeicker props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| value
+          td
+            div| timeicker 的值，可使用 v-model
+          td
+            div| Sring
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| placeholder
+          td
+            div| 默认文字
+          td
+            div| String
+          td
+            div| 选择时间
+        
+        //- 
+        tr
+          td
+            div| clearable
+          td
+            div| 是否可以清空
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| disabled
+          td
+            div| 是否禁用
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| size
+          td
+            div| 尺寸，可选值small，或者不设置
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| format
+          td
+            div| 日期类型，可选值为a、b、c，a表示HH:mm:ss, b表示HH:mm，c表示mm:ss
+          td
+            div| String
+          td
+            div| a
+        
+        //- 
+        tr
+          td
+            div| disabled-hours
+          td
+            div| 禁用的小时，比如[1,3,5]，表示1，3，5小时不可选
+          td
+            div| Array
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| disabled-minutes
+          td
+            div| 禁用的分钟
+          td
+            div| Array
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| disabled-seconds
+          td
+            div| 禁用的秒钟
+          td
+            div| Array
+          td
+            div| -
+  
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '3-7',
+            tab: '',
+            tab2: ''
+          },
+          time: '05:30:00',
+          time2: '06:35',
+          time3: '',
+        }
+      }
+    })

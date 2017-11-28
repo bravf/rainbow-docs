@@ -1,0 +1,129 @@
+extends ./_layout
+
+block title
+  | Card - Rainbow
+
+block content
+  h1| Card 卡片
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-card(
+          style="margin: 10px; width:200px;"
+        )
+          p(slot="title")
+            | 标准卡片
+          
+          a(href="#", slot="extra")
+            r-icon(type="ios-loop-strong")
+            span(style="vertical-align: middle;")| 换一换
+          
+          p| 卡片测试
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <r-card style="margin: 10px; width:200px;">
+              <p slot="title">标准卡片</p>
+                <a href="#" slot="extra">
+                  <r-icon type="ios-loop-strong"></r-icon>
+                  <span style="vertical-align: middle;">换一换</span>
+                </a>
+              <p>卡片测试</p>
+            </r-card>
+  
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Card props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| hover
+          td
+            div| 鼠标停悬时候时候显示阴影
+          td
+            div| Boolean
+          td
+            div| true
+  
+  .anchor
+    h3| Card slot
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 名称
+          th
+            div| 说明
+      tbody
+        //- 
+        tr
+          td
+            div| title
+          td
+            div| 自定义卡片标题，如果是简单文字，可使用 p 标签包裹
+        
+        //- 
+        tr
+          td
+            div| extra
+          td
+            div| 右上角额外显示的内容
+      
+
+block script
+  script.
+    var cities = []
+    for (var i=0; i<12; i++){
+      cities.push({
+        value: i,
+        label: '北京' + i,
+      })
+    }
+
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '4-1',
+            tab: '',
+            tab2: ''
+          },
+        }
+      },
+      methods: {
+        clickIcon () {
+          this.common.input1 = ''
+        }
+      }
+    })

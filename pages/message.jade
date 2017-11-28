@@ -1,0 +1,75 @@
+extends ./_layout
+
+block title
+  | Message - Rainbow
+
+block content
+  h1| Message 全局提示
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-button(
+          @click.native="$message('这是一条消息')"
+        )|消息
+        
+        r-button(
+          type="success",
+          @click.native="$message('恭喜你，这是一条消息', 'success')"
+        )|成功
+        
+        r-button(
+          type="warning",
+          @click.native="$message('警告哦，这是一条警告消息', 'warning')"
+        )|警告
+        
+        r-button(
+          type="danger",
+          @click.native="$message('错了哦，这是一错误条消息', 'error')"
+        )|错误
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <r-button @click.native="$message('这是一条消息')">消息</r-button>
+            <r-button @click.native="$message('恭喜你，这是一条消息', 'success')">成功</r-button>
+            <r-button @click.native="$message('警告哦，这是一条警告消息', 'warning')">警告</r-button>
+            <r-button @click.native="$message('错了哦，这是一错误条消息', 'error')">错误</r-button>
+
+block script
+  script.
+    var cities = []
+    for (var i=0; i<12; i++){
+      cities.push({
+        value: i,
+        label: '北京' + i,
+      })
+    }
+
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '4-2',
+            tab: '',
+            tab2: ''
+          },
+        }
+      },
+      methods: {
+        clickIcon () {
+          this.common.input1 = ''
+        }
+      }
+    })

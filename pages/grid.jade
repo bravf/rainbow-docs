@@ -1,0 +1,150 @@
+extends ./_layout
+
+block title
+  | Grid - Rainbow
+
+block content
+  h1| Grid 栅格
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-row(:gutter="10")
+          r-col(:span="4")
+            div| hello
+          r-col(:span="20")
+            div| world
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <r-row :gutter="10">
+              <r-col :span="4">
+                <div>hello</div>
+              </r-col>
+              <r-col :span="20">
+                <div>world</div>
+              </r-col>
+            </r-row>
+          
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Row props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| gutter
+          td
+            div| 栅格间距，单位 px，左右平分
+          td
+            div| Number
+          td
+            div| -
+
+        //- 
+        tr
+          td
+            div| align-items
+          td
+            div| flex 布局下的垂直对齐方式，可选值为top、middle、bottom
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| justify-content
+          td
+            div| flex 布局下的水平排列方式，可选值为start、end、center、space-around、space-between
+          td
+            div| String
+          td
+            div| -
+
+  .anchor
+    h3| Col props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| span
+          td
+            div| 栅格的占位格数，可选值为0~24的整数
+          td
+            div| Number | String
+          td
+            div| -
+
+        //- 
+        tr
+          td
+            div| offset
+          td
+            div| 栅格左侧的间隔格数
+          td
+            div| Number | String
+          td
+            div| -
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '2-1',
+            tab: '',
+            tab2: ''
+          },
+          currPage: 1,
+          total: 23400,
+        }
+      },
+      methods: {
+        hello () {
+          alert(this.total)
+        }
+      }
+    })
