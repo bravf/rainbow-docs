@@ -22,8 +22,9 @@
             },
             "www": {
                 "watch": false,
-                "version": true,
-                "optimize": true
+                "version": false,
+                "optimize": false,
+                "www": "../bravf.github.io/"
             }
         },
 
