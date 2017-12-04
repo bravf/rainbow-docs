@@ -28,7 +28,7 @@ block content
             v-model="endDate",
             placeholder="结束时间",
             clearable,
-            :disabled-date="disabledDate2",
+            :start-date="startDate"
             size="small",
           )
 
@@ -42,7 +42,7 @@ block content
             </div>
             <div class="margin-top-10">
               <h3>结束时间（size=small）</h3>
-              <r-datepicker v-model="endDate" placeholder="结束时间" clearable :disabled-date="disabledDate2" size="small"></r-datepicker>
+              <r-datepicker v-model="endDate" placeholder="结束时间" clearable :start-date="startDate" size="small"></r-datepicker>
             </div>
             <script>
             exprot default {
@@ -62,9 +62,6 @@ block content
                   /* 禁用小于今天的时期 */
                   var today = new Date
                   return +date < +today
-                },
-                disabledDate2 (date) {
-                  return +date <= +(new Date(this.startDate + ' 23:59:59'))
                 }
               }
             }
@@ -165,6 +162,17 @@ block content
             div| String
           td
             div| a
+        
+        //- 
+        tr
+          td
+            div| start-date
+          td
+            div| 设置一个开始时间，如果设置，那么当前 datepicker 小于 start-date 的日期将被禁止选择
+          td
+            div| String
+          td
+            div| -
   
 block script
   script.
@@ -196,8 +204,5 @@ block script
           var today = new Date
           return +date < +today
         },
-        disabledDate2 (date) {
-          return +date <= +(new Date(this.startDate + ' 23:59:59'))
-        }
       }
     })
