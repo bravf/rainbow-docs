@@ -11,7 +11,14 @@ block content
 
   r-card
     r-tabs(v-model="common.tab")
-      r-tab-pane(name="1", label="示例")
+      r-tab-pane(name="1", label="示例")        
+        div.margin-top-10
+          r-tag(closeable, type="primary") 标签一
+          r-tag(closeable, type="success") 标签二
+          r-tag(closeable, type="info") 标签三
+          r-tag(closeable, type="warning") 标签四
+          r-tag(closeable, type="danger") 标签五
+        
         div.margin-top-10
           r-tag()
             | 标签1
@@ -32,6 +39,13 @@ block content
         pre
           code(class="html")
           textarea(v-pre).
+            <div class="margin-top-10">
+              <r-tag closeable type="primary">标签一</r-tag>
+              <r-tag closeable type="success">标签二</r-tag>
+              <r-tag closeable type="info">标签三</r-tag>
+              <r-tag closeable type="warning">标签四</r-tag>
+              <r-tag closeable type="danger">标签五</r-tag>
+            </div>
             <div class="margin-top-10">
               <r-tag>标签1</r-tag>
               <r-tag>标签2</r-tag>
@@ -72,6 +86,17 @@ block content
           th
             div| 默认值
       tbody
+        //- 
+        tr
+          td
+            div| type
+          td
+            div| 枚举，一共有5个可选值，primary、success、info、warning、danger
+          td
+            div| String
+          td
+            div| info
+
         //- 
         tr
           td

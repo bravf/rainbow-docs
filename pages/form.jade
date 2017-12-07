@@ -357,8 +357,8 @@ block content
 
                 submit () {
                   console.log(JSON.stringify(this.formItem))
-                  this.$refs.myForm.validate(_=>{
-                    console.log(_)
+                  this.$refs.myForm.validate( (_, item)=>{
+                    console.log(_, item)
                   })
                 },
 
@@ -459,7 +459,7 @@ block content
           td
             div| validate
           td
-            div| 对表单进行校验，参数为校验完的回调，回调里 true 表示成功， false 表示失败
+            div| 对表单进行校验，参数为校验完的回调，回调里 true 表示成功， false 表示失败，如果失败则有第二个参数，表示第一个失败的 formItem
           td
             div| callback
         
@@ -707,8 +707,8 @@ block script
 
         submit () {
           console.log(JSON.stringify(this.formItem))
-          this.$refs.myForm.validate(_=>{
-            console.log(_)
+          this.$refs.myForm.validate( (_, item)=>{
+            console.log(_, item)
           })
         },
 
