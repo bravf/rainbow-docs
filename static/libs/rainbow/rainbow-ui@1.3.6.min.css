@@ -1,4 +1,4 @@
-@charset "UTF-8";.r-btn,.r-input-wrapper .r-input{-webkit-appearance:none;outline:0}.r-select-dropdown-list,.r-select-dropdown-list li,.r-timepicker-dropdown li,.r-timepicker-dropdown ul,li,ul{list-style:none}*{box-sizing:border-box;padding:0;margin:0}body,html{height:100%}body{font:12px "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;color:#314659;background-color:#EEE}a{color:#6089ec;text-decoration:none;outline:0}/*!
+@charset "UTF-8";.r-btn,.r-input-wrapper .r-input{-webkit-appearance:none;outline:0}.r-select-dropdown-list,.r-select-dropdown-list li,.r-timepicker-dropdown li,.r-timepicker-dropdown ul,li,ul{list-style:none}*{box-sizing:border-box;padding:0;margin:0;-webkit-tap-highlight-color:transparent}body,html{-webkit-text-size-adjust:none;height:100%}body{font:12px "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;color:#314659;background-color:#EEE}a{color:#6089ec;text-decoration:none;outline:0}/*!
 Ionicons, v2.0.0
 Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
 https://twitter.com/benjsperry  https://twitter.com/ionicframework
