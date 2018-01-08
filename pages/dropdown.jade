@@ -27,35 +27,12 @@ block content
               href="https://www.sogou.com/"
             )| 搜狗
       
-        div.margin-top-10
-          r-dropdown(
-            label="下拉菜单",
-            size="small"
-          )
-            r-dropdown-item(
-              href="http://baidu.com",
-              target="_blank"
-            )| 百度
-            r-dropdown-item(
-              @click.native="hello"
-            )| 360
-            r-dropdown-item(
-              href="https://www.sogou.com/"
-            )| 搜狗
-
       r-tab-pane(name="2", label="代码")
         pre
           code(class="html")
           textarea(v-pre).
             <div class="margin-top-10">
               <r-dropdown label="下拉菜单">
-                <r-dropdown-item href="http://baidu.com" target="_blank">百度</r-dropdown-item>
-                <r-dropdown-item @click.native="hello">360</r-dropdown-item>
-                <r-dropdown-item href="https://www.sogou.com/">搜狗</r-dropdown-item>
-              </r-dropdown>
-            </div>
-            <div class="margin-top-10">
-              <r-dropdown label="下拉菜单" size="small">
                 <r-dropdown-item href="http://baidu.com" target="_blank">百度</r-dropdown-item>
                 <r-dropdown-item @click.native="hello">360</r-dropdown-item>
                 <r-dropdown-item href="https://www.sogou.com/">搜狗</r-dropdown-item>
@@ -102,16 +79,6 @@ block content
           td
             div| -
 
-        //- 
-        tr
-          td
-            div| size
-          td
-            div| 尺寸，可选值 small 或者不设置
-          td
-            div| String
-          td
-            div| -
   
   .anchor
     h3| DropdownItem props
