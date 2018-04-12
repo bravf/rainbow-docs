@@ -14,12 +14,13 @@ block content
       r-tab-pane(name="1", label="示例")
         div.margin-top-10
           r-dropdown(
-            label="下拉菜单"
+            label="下拉菜单",
+            placement="right"
           )
             r-dropdown-item(
               href="http://baidu.com",
               target="_blank"
-            )| 百度
+            )| 百度百度百度百度百度百度
             r-dropdown-item(
               @click.native="hello"
             )| 360
@@ -32,8 +33,8 @@ block content
           code(class="html")
           textarea(v-pre).
             <div class="margin-top-10">
-              <r-dropdown label="下拉菜单">
-                <r-dropdown-item href="http://baidu.com" target="_blank">百度</r-dropdown-item>
+              <r-dropdown label="下拉菜单" placement="right">
+                <r-dropdown-item href="http://baidu.com" target="_blank">百度百度百度百度百度百度</r-dropdown-item>
                 <r-dropdown-item @click.native="hello">360</r-dropdown-item>
                 <r-dropdown-item href="https://www.sogou.com/">搜狗</r-dropdown-item>
               </r-dropdown>
@@ -78,6 +79,17 @@ block content
             div| String
           td
             div| -
+        
+        //- 
+        tr
+          td
+            div| placement
+          td
+            div| 对齐方向 left/right
+          td
+            div| String
+          td
+            div| left
 
   
   .anchor
