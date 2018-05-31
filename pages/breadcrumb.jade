@@ -1,0 +1,126 @@
+extends ./_layout
+
+block title
+  | Icon - Breadcrumb
+
+block content
+  h1| Breadcrumb 面包屑
+
+  div(class="anchor")
+    h2(id="概述")
+  
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")
+        r-breadcrumb
+          r-breadcrumb-item(href="http://baidu.com") 百度
+          r-breadcrumb-item(href="http://cnblogs.com", target="_blank") cnblogs
+          r-breadcrumb-item| 详情页
+        
+        r-breadcrumb(separator=">")
+          r-breadcrumb-item(href="http://baidu.com") 百度
+          r-breadcrumb-item(href="http://cnblogs.com", target="_blank") cnblogs
+          r-breadcrumb-item| 详情页
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea.
+            <r-breadcrumb>
+              <r-breadcrumb-item href="http://baidu.com">百度</r-breadcrumb-item>
+              <r-breadcrumb-item href="http://cnblogs.com" target="_blank">cnblogs</r-breadcrumb-item>
+              <r-breadcrumb-item>详情页</r-breadcrumb-item>
+            </r-breadcrumb>
+            <r-breadcrumb separator="&gt;">
+              <r-breadcrumb-item href="http://baidu.com">百度</r-breadcrumb-item>
+              <r-breadcrumb-item href="http://cnblogs.com" target="_blank">cnblogs</r-breadcrumb-item>
+              <r-breadcrumb-item>详情页</r-breadcrumb-item>
+            </r-breadcrumb>
+  
+  .anchor
+    h2| Api
+  
+  div(class="anchor")
+    h3| Breadcrumb props
+
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| separator
+          td
+            div| 分隔符
+          td
+            div| Sring
+          td
+            div| /
+
+  div(class="anchor")
+    h3| Breadcrumb-Item props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| href
+          td
+            div| 链接地址
+          td
+            div| Sring
+          td
+            div| 
+        
+        //- 
+        tr
+          td
+            div| target
+          td
+            div| 链接打开方式
+          td
+            div| Sring
+          td
+            div| 
+      
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '4-9',
+            tab: ''
+          }
+        }
+      }
+    })
