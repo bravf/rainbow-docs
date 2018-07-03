@@ -21,7 +21,8 @@ block content
           :sort-field="sortField",
           :sort-dir="sortDir",
           :loading="loading",
-          @row-click="rowClick"
+          @row-click="rowClick",
+          show-summary,
         )
           
           r-table-column(
@@ -77,7 +78,7 @@ block content
           textarea(v-pre).
             <r-table 
               :data="data1" ref="table" :border="false" :show-header="true" :sort-method="sort" 
-              :sort-field="sortField" :sort-dir="sortDir" :loading="loading" @row-click="rowClick"
+              :sort-field="sortField" :sort-dir="sortDir" :loading="loading" @row-click="rowClick" show-summary
             >
               <r-table-column width="50" type="checkbox"></r-table-column>
               <r-table-column width="50" type="index"></r-table-column>
@@ -261,6 +262,39 @@ block content
             div| Boolean
           td
             div| false
+        
+        //- 
+        tr
+          td
+            div| show-summary
+          td
+            div| 是否在表尾显示合计行
+          td
+            div| Boolean
+          td
+            div| false
+        
+        //- 
+        tr
+          td
+            div| summary-text
+          td
+            div| 合计行第一列的文本
+          td
+            div| Boolean
+          td
+            div| 合计
+
+        //- 
+        tr
+          td
+            div| summary-method
+          td
+            div| 自定义的合计计算方法
+          td
+            div| Function
+          td
+            div| 
   
   .anchor
     h3| Table events
