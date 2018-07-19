@@ -280,7 +280,7 @@ block content
           td
             div| on-success
           td
-            div| 文件上传成功时的钩子，返回参数为response，file。注意，此钩子必须设置，在回调里，要主动把 response的name,url 添加到 value 中，以实现双向绑定的值同步。之所以如此，是因为 response 的数据结构不固定，无法在组件内部处理。
+            div| 文件上传成功时的钩子，返回参数为response，file。注意，在回调里，要主动把 response的name,url 添加到 value 中，以实现双向绑定的值同步。之所以如此，是因为 response 的数据结构不固定，无法在组件内部处理。
           td
             div| Function
           td
@@ -341,6 +341,17 @@ block content
             div| String
           td
             div| file
+        
+        //- 
+        tr
+          td
+            div| removeable
+          td
+            div| 是否显示删除按钮
+          td
+            div| Boolean
+          td
+            div| true
   
 block script
   script.
