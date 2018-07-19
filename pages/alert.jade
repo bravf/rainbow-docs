@@ -1,0 +1,140 @@
+extends ./_layout
+
+block title
+  | Alert - Rainbow
+
+block content
+  h1| Alert 警告
+
+  div(class="anchor")
+    h2(id="概述")
+
+  r-card
+    r-tabs(v-model="common.tab")
+      r-tab-pane(name="1", label="示例")        
+        div.margin-top-10
+          r-alert(type="success")
+            | 成功提示的文案
+          r-alert(type="info")
+            | 消息提示的文案
+          r-alert(closeable, type="warning")
+            | 警告提示的文案
+          r-alert(closeable, type="danger", @close="close")
+            p| 错误提示的文案
+            p| 错误提示的文案2
+            a(href="https://baidu.com") 百度
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <div class="margin-top-10">
+                <r-alert type="success">成功提示的文案</r-alert>
+                <r-alert type="info">消息提示的文案</r-alert>
+                <r-alert closeable type="warning">警告提示的文案</r-alert>
+                <r-alert closeable type="danger" @close="close">
+                  <p>错误提示的文案</p>
+                  <p>错误提示的文案2</p><a href="https://baidu.com">百度</a>
+                </r-alert>
+              </div>
+
+              <script>
+              export default {
+                methods: {
+                  close (e) {
+                    console.log(e)
+                  }
+                }
+              }
+              </script>
+            
+  .anchor
+    h2| Api
+  
+  .anchor
+    h3| Tag props
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 属性
+          th
+            div| 说明
+          th
+            div| 类型
+          th
+            div| 默认值
+      tbody
+        //- 
+        tr
+          td
+            div| type
+          td
+            div| 枚举，一共有5个可选值，primary、success、info、warning、danger
+          td
+            div| String
+          td
+            div| info
+
+        //- 
+        tr
+          td
+            div| closeable
+          td
+            div| 标签是否可以关闭
+          td
+            div| Boolean
+          td
+            div| false
+  
+  .anchor
+    h3| Tag events
+  
+  div(class="r-table r-table-border api")
+    table
+      thead
+        tr
+          th
+            div| 事件名
+          th
+            div| 说明
+          th
+            div| 返回值
+
+      tbody
+        //- 
+        tr
+          td
+            div| on-close
+          td
+            div| 关闭时触发
+          td
+            div| event
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      watch: {
+        'common.componentValue' () {
+          location.href = this.common.componentValue + '.html'
+        }
+      },
+      data () {
+        return {
+          common: {
+            componentValue: '',
+            activeMenu: '4-10',
+            tab: '',
+            tab2: ''
+          },
+        }
+      },
+      methods: {
+        close (e, name) {
+          console.log(e, name)
+        }
+      }
+    })
