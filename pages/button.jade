@@ -67,7 +67,7 @@ block content
             <r-button icon="plus-round">添加</r-button>
             <r-button icon="plus-round" icon-pos="after">添加</r-button>
             <r-button icon="plus-round"></r-button>
-            <r-button icon="plus-round" loading>提交信息</r-button>
+            <r-button loading>提交信息</r-button>
   
   div(class="anchor")
     //- 按钮组
@@ -76,7 +76,7 @@ block content
   r-card
     r-tabs(v-model="common.tab2")
       r-tab-pane(name="1", label="示例")
-        r-button-group
+        r-button-group(align="right")
           r-button| 昨日
           r-button(disabled)| 今日
           r-button| 明日
@@ -85,7 +85,7 @@ block content
         pre
           code(class="html")
           textarea.
-            <r-button-group>
+            <r-button-group align="right">
               <r-button>昨日</r-button>
               <r-button disabled>今日</r-button>
               <r-button>明日</r-button>
@@ -224,6 +224,15 @@ block content
             div| String
           td
             div| -
+        tr
+          td
+            div| align
+          td
+            div| 按钮组对齐的位置，可选值left，center，right
+          td
+            div| String
+          td
+            div| left
 
 block script
   script.

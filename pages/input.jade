@@ -19,9 +19,8 @@ block content
         .margin-top-10
           r-input(
             placeholder, 
-            icon="ios-close-outline", 
+            clearable,
             v-model="common.input1",
-            @click-icon="clickIcon"
           )
 
       r-tab-pane(name="2", label="代码")
@@ -33,7 +32,7 @@ block content
               <span v-text="common.input1"></span>
             </div>
             <div class="margin-top-10">
-              <r-input placeholder icon="ios-close-outline" v-model="common.input1" @click-icon="clickIcon"></r-input>
+              <r-input placeholder clearable v-model="common.input1"></r-input>
             </div>
 
             <script>
@@ -188,6 +187,17 @@ block content
             div| trim
           td
             div| 是否在 blur 时候对 value 进行trim
+          td
+            div| Boolean
+          td
+            div| false
+
+        //- 
+        tr
+          td
+            div| clearable
+          td
+            div| 是否显示删除按钮
           td
             div| Boolean
           td
