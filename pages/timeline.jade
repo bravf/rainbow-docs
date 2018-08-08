@@ -34,7 +34,32 @@ block content
               <r-timeline-item>发布3.0版本</r-timeline-item>
               <r-timeline-item color="red"><a href="#">查看更多</a></r-timeline-item>
             </r-timeline>
-            
+  
+  r-card
+    r-tabs(v-model="common.tab2")
+      r-tab-pane(name="1", label="示例")
+        r-timeline(pending, mode="horizontal")
+          r-timeline-item(color="green")
+            r-icon(type="trophy", slot="dot")
+            span| 发布1.0版本
+
+          r-timeline-item()| 发布2.0版本
+          r-timeline-item()| 发布3.0版本
+          r-timeline-item(color="red")
+            a(href="#")| 查看更多
+
+      r-tab-pane(name="2", label="代码")
+        pre
+          code(class="html")
+          textarea(v-pre).
+            <r-timeline pending mode="horizontal">
+              <r-timeline-item color="green">
+                <r-icon type="trophy" slot="dot"></r-icon><span>发布1.0版本</span>
+              </r-timeline-item>
+              <r-timeline-item>发布2.0版本</r-timeline-item>
+              <r-timeline-item>发布3.0版本</r-timeline-item>
+              <r-timeline-item color="red"><a href="#">查看更多</a></r-timeline-item>
+            </r-timeline>
   .anchor
     h2| Api
   
@@ -64,6 +89,17 @@ block content
             div| Boolean
           td
             div| false
+        
+        //- 
+        tr
+          td
+            div| mode
+          td
+            div| 横向或纵向
+          td
+            div| String, 可选值 vertical, horizontal
+          td
+            div| vertical
   
   .anchor
     h3| TimelineItem props
