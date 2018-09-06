@@ -15,6 +15,14 @@
                     "ENV": "LOCAL"
                 }
             },
+            "dev2": {
+                "watch": true,
+                "version": false,
+                "optimize": false,
+                "env": {
+                    "ENV": "LOCAL2"
+                }
+            },
             "qa": {
                 "watch": false,
                 "version": false,
