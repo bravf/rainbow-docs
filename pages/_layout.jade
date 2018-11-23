@@ -10,11 +10,7 @@ html.no-js
 
     script(src="../static/libs/vue/vue.js")
 
-    if FEPACK.ENV === 'LOCAL2'
-      link(rel='stylesheet', href="http://127.0.0.1:8080/rainbow/index.css")
-      script(src="http://127.0.0.1:8080/rainbow/index.js")
-
-    else if FEPACK.ENV === 'LOCAL3'
+    if FEPACK.ENV === 'LOCAL3'
       link(rel='stylesheet', href="../static/libs/rainbow/rainbow-nash.css")
       script(src="../static/libs/rainbow/rainbow-nash.umd.min.js")
     
@@ -52,7 +48,7 @@ html.no-js
       .hljs{
         background-color: #f7f7f7;
       }
-      .hljs-name{
+      .hljs-name, .hljs-keyword{
         color: #6089ec;
         font-weight: normal;
       }

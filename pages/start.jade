@@ -7,7 +7,21 @@ block content
   h1| 安装
 
   div(class="anchor")
-    h2(id="CDN_引入")
+    h2| 模块化
+
+    pre
+      code
+      textarea.
+        npm isntall --save rainbow-nash
+        
+        import Vue from 'vue'
+        import Rainbow from 'rainbow-nash'
+        import 'rainbow-nash/dist/rainbow-nash.css'
+
+        Vue.use(Rainbow)
+
+  div(class="anchor")
+    h2| 直接引入
 
     pre
       code
