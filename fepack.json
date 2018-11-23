@@ -1,6 +1,6 @@
 {
     "server": {
-        "port": 8080
+        "port": 8081
     },
     "release": {
         "project": "rainbow-docs",
@@ -21,6 +21,14 @@
                 "optimize": false,
                 "env": {
                     "ENV": "LOCAL2"
+                }
+            },
+            "dev3": {
+                "watch": true,
+                "version": false,
+                "optimize": false,
+                "env": {
+                    "ENV": "LOCAL3"
                 }
             },
             "qa": {
