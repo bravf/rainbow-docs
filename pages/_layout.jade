@@ -17,8 +17,8 @@ html.no-js
     else if FEPACK.ENV === 'LOCAL2'
       script(src="http://localhost:8080/rainbow-nash/index.js")
     else
-      link(rel='stylesheet', href="https://unpkg.com/rainbow-nash@0.1.2/dist/rainbow-nash.css")
-      script(src="https://unpkg.com/rainbow-nash@0.1.2/dist/rainbow-nash.umd.min.js")
+      link(rel='stylesheet', href="https://unpkg.com/rainbow-nash/dist/rainbow-nash.css")
+      script(src="https://unpkg.com/rainbow-nash/dist/rainbow-nash.umd.min.js")
     
     link(rel='stylesheet', href="../static/libs/highlight/highlight@9.12.0.min.css")
     link(rel='stylesheet', href="../static/libs/highlight/vs.min.css")
@@ -32,13 +32,22 @@ html.no-js
         display: none;
       }
       .demo-header{
-        height: 60px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
       }
       .code-font{
         font-family: Consolas,Menlo,Courier,monospace;
       }
       .demo-header h1{
+        margin-right: auto;
         font-family: Consolas,Menlo,Courier,monospace;
+        font-size: 42px;
+      }
+      .demo-header h1 span{
+        font-size: 60px;
+        transform: rotate(7deg);
       }
       pre code{
         font-family: Consolas,Menlo,Courier,monospace;
@@ -76,51 +85,56 @@ html.no-js
 
   body
     r-app(id="app", v-cloak)
-      r-row(slot="header", align-items="center", class="demo-header")
-        r-col(:span="3", style="padding-left: 10px")
-          h1()| Rainbow.Doc
+      div(slot="header", align-items="center", class="demo-header")
+        h1(style="color: #f4615c")| 
+          span R
+          i ainbow.Doc
+        r-icon(type="paper-airplane")
+        r-dropdown(label="木已成鲨鱼", style="margin-left: 4px")
+          r-dropdown-item 个人信息
+          r-dropdown-item 登出
 
-        r-col(:span="4")
-          r-select(
-            placeholder="搜索组件...", 
-            filterable,
-            v-model="common.componentValue"
-          )
+        //- r-col(:span="4")
+        //-   r-select(
+        //-     placeholder="搜索组件...", 
+        //-     filterable,
+        //-     v-model="common.componentValue"
+        //-   )
             
-            //- Basic
-            r-select-option(label="Grid栅格", value="grid")
-            r-select-option(label="App布局", value="app")
-            r-select-option(label="Button按钮", value="button")
-            r-select-option(label="Icon图标", value="icon")
+        //-     //- Basic
+        //-     r-select-option(label="Grid栅格", value="grid")
+        //-     r-select-option(label="App布局", value="app")
+        //-     r-select-option(label="Button按钮", value="button")
+        //-     r-select-option(label="Icon图标", value="icon")
 
-            //- Form
-            r-select-option(label="Input输入框", value="input")
-            r-select-option(label="Radio单选框", value="radio")
-            r-select-option(label="Checkbox多选框", value="checkbox")
-            r-select-option(label="Table表格", value="table")
-            r-select-option(label="Select选择器", value="select")
-            r-select-option(label="Datepicker日期选择器", value="datepicker")
-            r-select-option(label="Timepicker时间选择器", value="timepicker")
-            r-select-option(label="Upload上传", value="upload")
-            r-select-option(label="Form表单", value="form")
+        //-     //- Form
+        //-     r-select-option(label="Input输入框", value="input")
+        //-     r-select-option(label="Radio单选框", value="radio")
+        //-     r-select-option(label="Checkbox多选框", value="checkbox")
+        //-     r-select-option(label="Table表格", value="table")
+        //-     r-select-option(label="Select选择器", value="select")
+        //-     r-select-option(label="Datepicker日期选择器", value="datepicker")
+        //-     r-select-option(label="Timepicker时间选择器", value="timepicker")
+        //-     r-select-option(label="Upload上传", value="upload")
+        //-     r-select-option(label="Form表单", value="form")
 
-            //- View 
-            r-select-option(label="Card卡片", value="card")
-            r-select-option(label="Message全局提示", value="message")
-            r-select-option(label="Modal对话框", value="modal")
-            r-select-option(label="Progress进度条", value="progress")
-            r-select-option(label="Timeline时间轴", value="timeline")
-            r-select-option(label="Tag标签", value="tag")
-            r-select-option(label="Tooltip文字提示", value="tooltip")
-            r-select-option(label="Tree树形控件", value="tree")
-            r-select-option(label="Breadcrumb面包屑", value="breadcrumb")
-            r-select-option(label="Alert警告组件", value="alert")
+        //-     //- View 
+        //-     r-select-option(label="Card卡片", value="card")
+        //-     r-select-option(label="Message全局提示", value="message")
+        //-     r-select-option(label="Modal对话框", value="modal")
+        //-     r-select-option(label="Progress进度条", value="progress")
+        //-     r-select-option(label="Timeline时间轴", value="timeline")
+        //-     r-select-option(label="Tag标签", value="tag")
+        //-     r-select-option(label="Tooltip文字提示", value="tooltip")
+        //-     r-select-option(label="Tree树形控件", value="tree")
+        //-     r-select-option(label="Breadcrumb面包屑", value="breadcrumb")
+        //-     r-select-option(label="Alert警告组件", value="alert")
 
-            //- navigation
-            r-select-option(label="Menu导航菜单", value="menu")
-            r-select-option(label="Tabs标签页", value="tabs")
-            r-select-option(label="Dropdown下拉菜单", value="dropdown")
-            r-select-option(label="Page分页", value="page")
+        //-     //- navigation
+        //-     r-select-option(label="Menu导航菜单", value="menu")
+        //-     r-select-option(label="Tabs标签页", value="tabs")
+        //-     r-select-option(label="Dropdown下拉菜单", value="dropdown")
+        //-     r-select-option(label="Page分页", value="page")
 
       r-menu(
         slot="aside",

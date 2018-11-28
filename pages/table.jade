@@ -24,7 +24,14 @@ block content
           @row-click="rowClick",
           show-summary,
         )
-          
+          r-table-column(
+            width="50",
+            type="expand",
+            align="center"
+          )
+            template(slot-scope="scope")
+              div {{scope.data.name}}
+
           r-table-column(
             width="50",
             type="checkbox",
@@ -80,6 +87,11 @@ block content
               :data="data1" ref="table" :border="false" :show-header="true" :sort-method="sort" 
               :sort-field="sortField" :sort-dir="sortDir" :loading="loading" @row-click="rowClick" show-summary
             >
+              <r-table-column width="50" type="expand" align="center">
+                <template slot-scope="scope">
+                  <div>{{scope.data.name}}</div>
+                </template>
+              </r-table-column>
               <r-table-column width="50" type="checkbox"></r-table-column>
               <r-table-column width="50" type="index"></r-table-column>
               <r-table-column title="姓名" field="name" width="80" :ellipsis="true">
@@ -404,7 +416,7 @@ block content
           td
             div| type
           td
-            div| 列类型，可选值有 index、checkbox、radio 或者不设置
+            div| 列类型，可选值有 index、checkbox、radio、expand 或者不设置
           td
             div| Sring
           td
