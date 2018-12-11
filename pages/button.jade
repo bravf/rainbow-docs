@@ -18,6 +18,7 @@ block content
         r-button(type="success")| 绿色按钮
         r-button(type="danger")| 红色按钮
         r-button(type="warning")| 黄色按钮
+        r-button(type="primary", href="https://baidu.com")| 这是一个链接按钮
         
         br
         br
@@ -35,10 +36,11 @@ block content
 
         br
 
-        r-button(icon="plus-round")| 添加
-        r-button(icon="plus-round", icon-pos="after")| 添加
-        r-button(icon="plus-round")
-        r-button(icon="plus-round", loading)| 提交信息
+        r-button-group
+          r-button(icon="plus-round")| 添加
+          r-button(icon="plus-round", icon-pos="after")| 添加
+          r-button(icon="plus-round")
+          r-button(icon="plus-round", loading)| 提交信息
 
       r-tab-pane(name="2", label="代码")
         pre
@@ -64,10 +66,12 @@ block content
             
             <br>
             
-            <r-button icon="plus-round">添加</r-button>
-            <r-button icon="plus-round" icon-pos="after">添加</r-button>
-            <r-button icon="plus-round"></r-button>
-            <r-button loading>提交信息</r-button>
+            <r-button-group>
+              <r-button icon="plus-round">添加</r-button>
+              <r-button icon="plus-round" icon-pos="after">添加</r-button>
+              <r-button icon="plus-round"></r-button>
+              <r-button loading>提交信息</r-button>
+            </r-button-group>
   
   div(class="anchor")
     //- 按钮组
@@ -198,6 +202,28 @@ block content
             div| String
           td
             div| before
+        
+        //- 
+        tr
+          td
+            div| href
+          td
+            div| 当设置此属性，表示此为链接按钮
+          td
+            div| String
+          td
+            div| -
+        
+        //- 
+        tr
+          td
+            div| target
+          td
+            div| 如果设置了 href 属性，则 target 生效
+          td
+            div| String
+          td
+            div| _blank
 
   div(class="anchor")
     h3| ButtonGroup props
